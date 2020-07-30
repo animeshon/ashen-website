@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Phones from '../assets/phones.png';
+import Phones from '../assets/privacy.png';
 
 import './Slide01.scss';
 
 const MangaFeature = ({ strings, lang }) => (
-    <div className="manga-feature smartphones-feature">
+    <div className="manga-feature smartphones-feature additional-feature">
         <h2 className={lang === 'ja' ? 'italic' : ''}>{strings.headline}</h2>
         <div className="content">
             <div className="texts">
@@ -19,7 +19,7 @@ const MangaFeature = ({ strings, lang }) => (
                 <hr />
                 {strings.priceFeature && <h3>{strings.priceFeature}</h3>}
             </div>
-            <div className="phones">
+            <div className="phones-right">
                 <img src={Phones} alt={strings.imageOneAltText} />
             </div>
         </div>

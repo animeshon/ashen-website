@@ -5,7 +5,9 @@ import { navigate } from '@reach/router';
 import { validate, checkValidity } from './resources/validation';
 
 import Header from './components/Header';
-import AshenFeature from './components/Slide01';
+import AshenFeature01L from './components/Slide01L';
+import AshenFeature02R from './components/Slide02R';
+import AshenFeature03L from './components/Slide03L';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 
@@ -232,9 +234,17 @@ class App extends React.Component {
                         typeFunction={this.handleTypeEmail}
                         handleSubmit={this.handleSubmit}
                     />
-                    <AshenFeature
+                    <AshenFeature01L
                         lang={lang}
-                        strings={dataLang.firstFeature || {}}
+                        strings={dataLang.feature_00 || {}}
+                    />
+                    <AshenFeature02R
+                        lang={lang}
+                        strings={dataLang.feature_01 || {}}
+                    />
+                    <AshenFeature03L
+                        lang={lang}
+                        strings={dataLang.feature_02 || {}}
                     />
                     <FAQ
                         lang={lang}
