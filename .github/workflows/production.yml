@@ -19,9 +19,6 @@ jobs:
     steps:
     - name: Clone the repository code
       uses: actions/checkout@v2
-      with:
-        submodules: true
-        token: ${{ secrets.SUBMODULES_CREDENTIALS }}
 
     - name: Build and push Docker images to Google Cloud Registry
       uses: docker/build-push-action@v1
@@ -35,7 +32,7 @@ jobs:
         tag_with_sha: true
 
   deployment:
-    needs: [ build, provision ]
+    needs: [ build ]
     runs-on: ubuntu-latest
 
     env:
