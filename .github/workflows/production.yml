@@ -28,6 +28,7 @@ jobs:
         registry: gcr.io
         repository: ${{ env.PROJECT_ID }}/ashen-website
         tags: latest,${{ github.sha }}
+        cache_froms: "${{ env.PROJECT_ID }}/ashen-website:latest"
         tag_with_ref: true
         tag_with_sha: true
 
