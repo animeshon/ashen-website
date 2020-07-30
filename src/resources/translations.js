@@ -90,13 +90,11 @@ export const stringsLang = lang => {
         default:
             return {
                 header: {
-                    headerTitle: 'Experience new Manga from Japan',
-                    headerUnderline: 'Read and watch anywhere in any language',
-                    headerFormPlaceholder: 'E-mail',
-                    headerFormButton: 'Join Now',
-                    headerFormDisclaimer: `Get free trial for a month
-                                           When we start 5.99€ /month
-                                           No credit card required`,
+                    headerTitle: 'Source?',
+                    headerUnderline: 'Just ask Animeshon',
+                    headerFormPlaceholder: 'Filename',
+                    headerFormButton: 'Upload',
+                    headerFormDisclaimer: `This service is in alpha preview and might not be stable. We appreciate your patience.`,
                 },
                 firstFeature: {
                     headline: 'Better Manga Experience',
