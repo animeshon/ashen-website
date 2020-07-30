@@ -1,0 +1,9 @@
+.cache
+.codefresh.yaml
+.dockerfile
+.dockerignore
+.git
+.gitignore
+Dockerfile
+nginx
+README.md
