@@ -5,9 +5,7 @@ import { navigate } from '@reach/router';
 import { validate, checkValidity } from './resources/validation';
 
 import Header from './components/Header';
-import MangaFeature from './components/Slide01';
-import AppSupport from './components/Slide02';
-import Trial from './components/Trial';
+import AshenFeature from './components/Slide01';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 
@@ -234,22 +232,9 @@ class App extends React.Component {
                         typeFunction={this.handleTypeEmail}
                         handleSubmit={this.handleSubmit}
                     />
-                    <MangaFeature
+                    <AshenFeature
                         lang={lang}
                         strings={dataLang.firstFeature || {}}
-                    />
-                    <AppSupport
-                        lang={lang}
-                        strings={dataLang.secondFeature || {}}
-                    />
-                    <Trial
-                        lang={lang}
-                        strings={dataLang.trialFeature || {}}
-                        valueTrial={valueTrial}
-                        valueTrialError={valueTrialError}
-                        valueTrialSuccess={valueTrialSuccess}
-                        typeFunction={this.handleTypeEmail}
-                        handleSubmit={this.handleSubmit}
                     />
                     <FAQ
                         lang={lang}
