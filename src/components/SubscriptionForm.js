@@ -23,30 +23,9 @@ const SubscriptionForm = ({
             >
                 <div id="mc-signup-scroll">
                     <div className="mc-field-group">
-                        <input
-                            aria-label="email"
-                            type="email"
-                            placeholder={labels.placeholder}
-                            onChange={e => typeFunction(e)}
-                            defaultValue={value}
-                            title={
-                                source === 'header'
-                                    ? 'valueHeader'
-                                    : 'valueTrial'
-                            }
-                            className={`required email${error ? ' error' : ''}`}
-                            id="mce-EMAIL"
-                        />
+                        <input aria-label="file" type="file" id="upload" />
+                        <label for="upload">Search Image</label>
                     </div>
-                    <input
-                        aria-label={labels.buttonLabel}
-                        type="submit"
-                        tabIndex="0"
-                        value={labels.buttonLabel}
-                        name="subscribe"
-                        id="mc-subscribe"
-                        className="button"
-                    />
                 </div>
             </form>
         </div>
