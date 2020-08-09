@@ -29,6 +29,7 @@ jobs:
         tag_with_sha: true
 
   provision:
+    needs: [ build ]
     runs-on: ubuntu-latest
 
     steps:
