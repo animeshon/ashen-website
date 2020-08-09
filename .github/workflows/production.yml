@@ -2,10 +2,8 @@ name: Production CI
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID_TIER_0 }}
-  GKE_CLUSTER: spider
-  GKE_ZONE: us-central1-b
-  GKE_CREDENTIALS: ${{ secrets.GKE_SPIDER_TIER_0_CREDENTIALS }}
-  GCR_CREDENTIALS: ${{ secrets.GCR_SPIDER_TIER_0_CREDENTIALS }}
+  GCR_CREDENTIALS: ${{ secrets.GCR_GENERAL_TIER_0_CREDENTIALS }}
+  TF_WORKSPACE: tier-0
 
 on:
   push:
@@ -25,43 +23,29 @@ jobs:
         username: _json_key
         password: ${{ env.GCR_CREDENTIALS }}
         registry: gcr.io
-        repository: ${{ env.PROJECT_ID }}/ashen-website
+        repository: ${{ env.PROJECT_ID }}/ashen-frontend
         tags: latest,${{ github.sha }}
         tag_with_ref: true
         tag_with_sha: true
 
-  deployment:
-    needs: [ build ]
+  provision:
     runs-on: ubuntu-latest
-
-    env:
-      KUBECONFIG: ${{ github.workspace }}/.kube/config
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/credentials.json
 
     steps:
     - name: Clone the repository code
       uses: actions/checkout@v2
 
-    - name: Install and configure Google Cloud CLI
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+    - name: Setup the Terraform CLI
+      uses: hashicorp/setup-terraform@v1
       with:
-        version: '302.0.0'
-        service_account_key: ${{ env.GKE_CREDENTIALS }}
-        project_id: ${{ env.PROJECT_ID }}
+        cli_config_credentials_token: ${{ secrets.TF_CREDENTIALS }}
 
-    - name: Authenticate to kubernetes via gcloud command
-      run: |-
-        echo $GKE_CREDENTIALS > $GOOGLE_APPLICATION_CREDENTIALS
-        
-        gcloud config set container/use_application_default_credentials True
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE" --project "$PROJECT_ID"
+    - name: Initialize the Terraform working directory
+      working-directory: ./terraform
+      id: init
+      run: terraform init
 
-    - name: Install or upgrade the Helm chart
-      uses: WyriHaximus/github-action-helm3@v2
-      with:
-        exec: |-
-          helm upgrade ashen-website ./helm/ashen-website  \
-            --install \
-            --values ./helm/values.yaml \
-            --set image.tag=${{ github.sha }} \
-            --namespace ash
+    - name: Apply the Terraform execution plan
+      working-directory: ./terraform
+      id: plan
+      run: terraform apply -auto-approve -no-color
