@@ -1,26 +1,24 @@
 import React from 'react';
 
-import './SubscriptionForm.scss';
+import './UploadForm.scss';
 
-const SubscriptionForm = ({
-    source,
-    value,
-    typeFunction,
+const UploadForm = ({
     handleSubmit,
-    labels,
-    error,
 }) => {
     return (
         <div
             id="mc-signup"
-            className={
-                source === 'header' ? 'from-header' : 'from-subscription-box'
-            }
+            className={'from-header'}
         >
             <form
                 onSubmit={e => handleSubmit(e)}
-                id={source === 'header' ? 'valueHeader' : 'valueTrial'}
             >
+                <div class="search-wrapper">
+                    <div class="lds-ripple">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
                 <div id="mc-signup-scroll">
                     <div className="mc-field-group">
                         <input aria-label="file" type="file" id="upload" />
@@ -32,4 +30,4 @@ const SubscriptionForm = ({
     );
 };
 
-export default SubscriptionForm;
+export default UploadForm;

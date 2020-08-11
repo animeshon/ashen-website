@@ -2,7 +2,7 @@ import React from 'react';
 
 import Phones from '../assets/links.png';
 
-import './Slide01.scss';
+import './Slide.scss';
 
 const MangaFeature = ({ strings, lang }) => (
     <div className="manga-feature smartphones-feature additional-feature">
