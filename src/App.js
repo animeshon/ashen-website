@@ -14,7 +14,7 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/upload" component={Upload} />
+                <Route path="/results" component={Upload} />
                 <Route path="/" component={Home} />
             </Switch>
         </Router>
