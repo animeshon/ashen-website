@@ -4,6 +4,7 @@ env:
   PROJECT_ID: ${{ secrets.PROJECT_ID_TIER_0 }}
   GCR_CREDENTIALS: ${{ secrets.GCR_GENERAL_TIER_0_CREDENTIALS }}
   TF_WORKSPACE: tier-0
+  TF_VAR_image_tag: ${{ github.sha }}
 
 on:
   push:
@@ -40,11 +41,15 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         cli_config_credentials_token: ${{ secrets.TF_CREDENTIALS }}
+      env:
+        TF_VAR_image_tag: ${{ github.sha }}
 
     - name: Initialize the Terraform working directory
       working-directory: ./terraform
       id: init
       run: terraform init
+      env:
+        TF_VAR_image_tag: ${{ github.sha }}
 
     - name: Apply the Terraform execution plan
       working-directory: ./terraform
