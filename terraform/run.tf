@@ -1,12 +1,3 @@
-# NOTE: A new id is generated each time we switch to a new image tag.
-resource "random_id" "source" {
-  keepers = {
-    image_tag = var.image_tag
-  }
-
-  byte_length = 8
-}
-
 resource "google_cloud_run_service" "source" {
   project  = local.project_id
   location = "us-central1"
@@ -18,7 +9,6 @@ resource "google_cloud_run_service" "source" {
         "autoscaling.knative.dev/maxScale" = "5"
         "run.googleapis.com/client-name"   = "cloud-console"
       }
-      name = format("source-animeshon-com-%s", random_id.source.hex) 
     }
 
     spec {
@@ -47,6 +37,8 @@ resource "google_cloud_run_service" "source" {
     percent         = 100
     latest_revision = true
   }
+
+  autogenerate_revision_name = true
 }
 
 # Configure the domain name mapping for the instance to source.animeshon.com.
