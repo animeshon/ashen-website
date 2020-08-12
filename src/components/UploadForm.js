@@ -4,6 +4,7 @@ import './UploadForm.scss';
 
 const UploadForm = ({
     handleSubmit,
+    isLoading,
 }) => {
     return (
         <div
@@ -13,16 +14,16 @@ const UploadForm = ({
             <form
                 onSubmit={e => handleSubmit(e)}
             >
-                <div class="search-wrapper">
-                    <div class="lds-ripple">
+                <div className={"search-wrapper"}>
+                    {isLoading ? <div className={"lds-ripple"}>
                         <div></div>
                         <div></div>
-                    </div>
+                    </div> : ''}
                 </div>
                 <div id="mc-signup-scroll">
                     <div className="mc-field-group">
-                        <input aria-label="file" type="file" id="upload" />
-                        <label for="upload">Search Image</label>
+                        <input aria-label="file" type="file" id="upload" accept=".png,.jpg,.jpeg" onChange={handleSubmit} disabled={isLoading}/>
+                        <label htmlFor={"upload"}>Search Image</label>
                     </div>
                 </div>
             </form>

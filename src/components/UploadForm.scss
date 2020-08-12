@@ -57,6 +57,11 @@
             font-weight: 300;
         }
     }
+
+    #upload:disabled + label {
+      background: #ccc;
+      cursor: progress;
+    }
 }
 
 .from-header form {
@@ -120,7 +125,6 @@ p.success {
     height: 200px;
 
     .lds-ripple {
-        display: none;
         margin-top: 70px;
     }
 }

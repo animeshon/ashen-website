@@ -17,19 +17,11 @@ export default class Upload extends React.Component {
 
     componentDidMount() {
         const presetLang = queryString.parse(window.location.search).hl
-        const isoLang = navigator.language;
-        const machine = navigator.platform;
-        const lang = presetLang ? (presetLang.startsWith('ja') ? 'ja' : 'en') : (navigator.language.startsWith('ja') ? 'ja' : 'en');
 
         this.setState(
             {
-                isoLang,
-                lang,
-                machine,
-                dataLang: stringsLang(lang),
-            },
-            () => {
-                navigate(`?hl=${lang === 'en' ? 'en-US' : 'ja-JP'}`);
+                lang: presetLang,
+                dataLang: stringsLang(presetLang),
             }
         );
     }
@@ -73,9 +65,7 @@ export default class Upload extends React.Component {
                                 }`}
                         />
                     </div>
-                    <HeaderSwitch
-                        handleSubmit={this.handleSubmit}
-                    />
+                    <HeaderSwitch />
                     <Footer />
                 </StrictMode>
             );

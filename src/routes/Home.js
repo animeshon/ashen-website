@@ -24,6 +24,7 @@ export default class Home extends React.Component {
         valueTrialSuccess: '',
         accordionSelection: 0,
         lang: 'en',
+        isLoading: false,
     };
 
     componentDidMount() {
@@ -51,13 +52,34 @@ export default class Home extends React.Component {
             valueTrialError: '',
             [e.target.title]: e.target.value,
         });
-    };
+    };  
 
     handleSubmit = e => {
-        e.preventDefault();
-        e.persist();
+        this.setState({ isLoading: true });
 
-        // TODO: Handle file upload and AJAX response.
+        const data = new FormData()
+        data.append('image', e.target.files[0])
+
+        fetch("https://source.animeapis.com/v1/search", {
+            method: 'POST',
+            body: data
+        })
+            .then(response => response.json())
+            .then(
+                (result) => {
+                    // TODO: This part shouldn't be required after fixing the backend.
+                    const resp = JSON.parse(result);
+                    const xref = JSON.parse(resp.response.docs[0].xref);
+
+                    const hl = queryString.parse(window.location.search).hl;
+                    const location = `/results?anidb_id=${xref.AniDBAnimeID}&thetvdb_id=${xref.TvDBSeriesID}&hl=${hl}`;
+
+                    this.props.history.push(location);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
     };
 
     accordionOnClick = e => {
@@ -105,6 +127,7 @@ export default class Home extends React.Component {
             valueHeaderSuccess,
             dataLang,
             lang,
+            isLoading,
         } = this.state;
         if (dataLang !== undefined) {
             return (
@@ -131,6 +154,7 @@ export default class Home extends React.Component {
                         valueHeaderError={valueHeaderError}
                         valueHeaderSuccess={valueHeaderSuccess}
                         handleSubmit={this.handleSubmit}
+                        isLoading={isLoading}
                     />
                     <AshenFeature01L
                         lang={lang}

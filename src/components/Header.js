@@ -14,6 +14,7 @@ const Header = ({
     valueHeaderSuccess,
     strings,
     lang,
+    isLoading,
 }) => (
         <header className="header">
             <img className="brand" src={Brand} alt="Animeshon Logo" />
@@ -22,7 +23,7 @@ const Header = ({
                     {strings.headerTitle}
                 </h1>
                 <h2>{strings.headerUnderline}</h2>
-                <UploadForm handleSubmit={handleSubmit} />
+                <UploadForm handleSubmit={handleSubmit} isLoading={isLoading} />
                 {valueHeaderError === '' ? null : (
                     <p className="error">{parse(valueHeaderError)}</p>
                 )}
