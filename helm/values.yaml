@@ -1,7 +1,0 @@
-fullnameOverride: "ashen-website"
-
-service:
-  type: NodePort
-
-nodeSelector:
-  reserved: "perceptual-hashing"

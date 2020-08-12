@@ -50,3 +50,5 @@ jobs:
       working-directory: ./terraform
       id: plan
       run: terraform apply -auto-approve -no-color
+      env:
+        TF_VAR_image_tag: ${{ github.sha }}
