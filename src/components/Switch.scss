@@ -1,0 +1,149 @@
+.header .text-title {
+  font-size: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.header .confidence p {
+  font-size: 18px;
+  width: 100%;
+
+  span {
+    font-weight: bold;
+  }
+
+  .confidence-HIGH {
+    color: #00f900;
+  }
+  .confidence-MEDIUM {
+    color: #f9ca00;
+  }
+  .confidence-LOW, .confidence-MISMATCH {
+    color: #f90000;
+  }
+}
+
+.text {
+    width: 100%;
+}
+
+.header .choose-text h1 {
+    max-width: none;
+    margin-top: 30px;
+    font-size: 60px;
+    width: 100%;
+}
+
+.header .animate-text {
+    margin-top: 100px;
+}
+
+#valueHeader {
+    width: 100%;
+}
+
+.subscription-box {
+    width: 100%;
+}
+
+.wrap
+{
+  margin:50px auto 0 auto;
+  width:100%;
+  display:flex;
+
+  .animeshon {
+    background-color: #ef0c40;
+    flex-grow: 2;
+  }
+}
+
+.no-image {
+  background-image: none!important;
+}
+
+.tile
+{
+  width:450px;
+  height:450px;
+  margin:30px;
+  background-color:#444;
+  display:inline-block;
+  background-size:cover;
+  position:relative;
+  cursor:pointer;
+  transition: all 0.4s ease-out;
+  box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.44);
+  overflow:hidden;
+  color:white;
+  font-family:'Roboto';
+  
+}
+.tile img
+{
+  margin-top: 80px;
+  width:70%;
+  margin: 150px auto 0 auto;
+  top:0;
+  left:0;
+  z-index:0;
+  transition: all 0.4s ease-out;
+}
+
+.comingsoon-wrapper {
+    margin-top: 200px;
+}
+
+.tile .preview {
+    margin-top: 80px;
+    width: 80px;
+}
+
+#comingsoon {
+  font-weight: 300;
+  font-size: 50px;
+  width: 100%;
+  text-align: center;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.tile .text
+{
+/*   z-index:99; */
+  position:absolute;
+  padding:30px;
+  height:calc(100% - 60px);
+}
+.tile h1
+{
+  font-weight:300;
+  margin:0;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+.animate-text
+{
+  opacity:0;
+  transition: all 0.6s ease-in-out;
+}
+.tile:hover
+{
+/*   background-color:#99aeff; */
+box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
+  transform:scale(1.05);
+}
+.tile:hover img
+{
+  opacity: 0.2;
+}
+.tile:hover .animate-text
+{
+  transform:translateX(0);
+  opacity:1;
+}
+
+@media (max-width: 1000px) {
+  .wrap {
+    flex-direction: column;
+    width:400px;
+  }
+}
