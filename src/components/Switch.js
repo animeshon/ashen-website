@@ -7,6 +7,9 @@ import AnidbImage from '../assets/anidb.png';
 import TvdbImage from '../assets/tvdb.png';
 
 const Switch = () => {
+    const confidence = queryString.parse(window.location.search).confidence;
+    const responseTime = queryString.parse(window.location.search).t;
+
     return (
         <div
             id="mc-signup"
@@ -15,6 +18,7 @@ const Switch = () => {
             <div class="choose-text">
                 <h1>WHICH ANIME SOURCE?</h1>
             </div>
+            <div class="confidence"><p>Confidence: <span className={`confidence-${confidence}`}>{confidence}</span> | Query time: { `${responseTime}s` }</p></div>
             <div class="wrap">
                 <a class="tile" href={`https://anidb.net/a${queryString.parse(window.location.search).anidb_id}`} target="_blank">
                     <div class="text">
