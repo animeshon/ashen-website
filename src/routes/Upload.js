@@ -3,7 +3,7 @@ import React, { StrictMode } from 'react';
 import { navigate } from '@reach/router';
 import queryString from 'query-string';
 
-import Header from '../components/Header';
+import HeaderSwitch from '../components/HeaderSwitch';
 import Footer from '../components/Footer';
 
 import { stringsLang } from '../resources/translations';
@@ -73,7 +73,7 @@ export default class Upload extends React.Component {
                                 }`}
                         />
                     </div>
-                    <Header
+                    <HeaderSwitch
                         handleSubmit={this.handleSubmit}
                     />
                     <Footer />
