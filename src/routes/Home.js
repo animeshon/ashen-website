@@ -67,11 +67,8 @@ export default class Home extends React.Component {
             .then(response => response.json())
             .then(
                 (result) => {
-                    // TODO: This part shouldn't be required after fixing the backend.
-                    const resp = JSON.parse(result);
-                    const xref = JSON.parse(resp.response.docs[0].xref);
-                    const distance = resp.response.docs[0].d;
-                    const responseTime = (parseFloat(resp.responseHeader.QTime) / 1000).toFixed(2);
+                    const distance = result.xRefs[0].distance;
+                    const responseTime = (parseFloat(result.xRefs[0].queryTime) / 1000).toFixed(2);
 
                     var confidence = "UNKNOWN";
                     if (parseFloat(distance) < 8) {
