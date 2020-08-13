@@ -50,7 +50,7 @@ jobs:
       working-directory: ./terraform
       id: vars
       run: |-
-        cat > ./terraform/pipeline.auto.tfvars <<EOF
+        cat > pipeline.auto.tfvars <<EOF
         image_tag = "${{ github.sha }}"
         EOF
 
