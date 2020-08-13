@@ -46,12 +46,15 @@ jobs:
       id: init
       run: terraform init
 
-    - name: Remove random_id manually
+    - name: Setup Terraform variables
       working-directory: ./terraform
-      id: cleanup
-      run: terraform state rm 'random_id.source'
+      id: vars
+      run: |-
+        cat > ./terraform/pipeline.auto.tfvars <<EOF
+        image_tag = "${{ github.sha }}"
+        EOF
 
     - name: Apply the Terraform execution plan
       working-directory: ./terraform
       id: plan
-      run: terraform apply -auto-approve -no-color -var='image_tag=${{ github.sha }}'
+      run: terraform apply -auto-approve -no-color
