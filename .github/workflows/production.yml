@@ -46,8 +46,12 @@ jobs:
       id: init
       run: terraform init
 
+    - name: Remove random_id manually
+      working-directory: ./terraform
+      id: cleanup
+      run: terraform state rm 'random_id.source'
+
     - name: Apply the Terraform execution plan
       working-directory: ./terraform
       id: plan
-      run: terraform state rm 'random_id.source'
       run: terraform apply -auto-approve -no-color -var='image_tag=${{ github.sha }}'
