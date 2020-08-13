@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import Home from './routes/Home';
-import Upload from './routes/Upload';
+import ResultView from './routes/Result';
 
 import {
     BrowserRouter as Router,
@@ -14,7 +14,7 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/results" component={Upload} />
+                <Route path="/results" component={ResultView} />
                 <Route path="/" component={Home} />
             </Switch>
         </Router>

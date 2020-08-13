@@ -67,8 +67,11 @@ export default class Home extends React.Component {
             .then(response => response.json())
             .then(
                 (result) => {
-                    const distance = result.xRefs[0].distance;
-                    const responseTime = (parseFloat(result.xRefs[0].queryTime) / 1000).toFixed(2);
+                    console.log(result);
+
+                    const xref = result[0].xRefs;
+                    const distance = result[0].distance;
+                    const responseTime = (parseFloat(result[0].queryTimeMs) / 1000).toFixed(2);
 
                     var confidence = "UNKNOWN";
                     if (parseFloat(distance) < 8) {
@@ -82,7 +85,7 @@ export default class Home extends React.Component {
                     }
 
                     const hl = queryString.parse(window.location.search).hl;
-                    const location = `/results?anidb_id=${xref.AniDBAnimeID}&thetvdb_id=${xref.TvDBSeriesID}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
+                    const location = `/results?anidb_id=${xref.aniDBAnimeID}&thetvdb_id=${xref.tvDBSeriesID}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
 
                     this.props.history.push(location);
                 },

@@ -32,6 +32,7 @@
     margin-top: 30px;
     font-size: 60px;
     width: 100%;
+    padding: 0 30px;
 }
 
 .header .animate-text {
@@ -141,9 +142,64 @@ box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
   opacity:1;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1280px) {
+  #comingsoon {
+    font-size: 25px;
+  }
+
+  .header {
+    .text-title {
+      font-size: 30px;
+    }
+
+    .choose-text h1 {
+      font-size: 40px;
+    }
+  }
+
   .wrap {
+    padding: 0;
     flex-direction: column;
-    width:400px;
+    max-width:400px;
+  }
+
+  .tile.animeshon {
+    height: 130px;
+  }
+
+  .tile {
+    width: 80%;
+    height: 220px;
+    margin: 0 auto 30px auto;
+
+    .text {
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    img {
+      margin-top: 70px;
+      width: 50%;
+    }
+
+    .comingsoon-wrapper {
+      margin-top: 60px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .header {
+    .text-title {
+      font-size: 30px;
+    }
+
+    .choose-text h1 {
+      font-size: 20px;
+    }
+
+    .confidence p {
+      font-size: 12px;
+    }
   }
 }

@@ -10,7 +10,7 @@ import { stringsLang } from '../resources/translations';
 
 import '../styles/reset.scss';
 
-export default class Upload extends React.Component {
+export default class ResultView extends React.Component {
     state = {
         lang: 'en',
     };

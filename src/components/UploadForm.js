@@ -21,7 +21,7 @@ const UploadForm = ({
                     </div> : ''}
                 </div>
                 <div id="mc-signup-scroll">
-                    <div className="mc-field-group">
+                    <div className={"mc-field-group"}>
                         <input aria-label="file" type="file" id="upload" accept=".png,.jpg,.jpeg" onChange={handleSubmit} disabled={isLoading}/>
                         <label htmlFor={"upload"}>Search Image</label>
                     </div>
