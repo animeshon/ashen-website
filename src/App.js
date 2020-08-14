@@ -14,7 +14,7 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route exact={true} path='/results' component={Upload} />
+                <Route exact={true} path='/results' component={ResultView} />
                 <Route exact={true} path='/' component={Home} />
                 {/* <Route exact={true} path='*' component={NotFound} /> */}
             </Switch>
