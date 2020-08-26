@@ -38,7 +38,8 @@ export default class Home extends React.Component {
                 isoLang,
                 lang,
                 machine,
-                dataLang: stringsLang(lang),
+                // dataLang: stringsLang(lang),
+                dataLang: stringsLang('en'),
             },
             () => {
                 navigate(`?hl=${lang === 'en' ? 'en-US' : 'ja-JP'}`);
@@ -145,7 +146,7 @@ export default class Home extends React.Component {
         if (dataLang !== undefined) {
             return (
                 <StrictMode>
-                    <div className="lang-selector">
+                    {/* <div className="lang-selector">
                         <span // eslint-disable-line
                             data-lang="en"
                             onClick={e => this.changeLanguage(e)}
@@ -160,7 +161,7 @@ export default class Home extends React.Component {
                                 lang.includes('ja') ? ' selected' : ''
                                 }`}
                         />
-                    </div>
+                    </div> */}
                     <Header
                         lang={lang}
                         strings={dataLang.header || {}}

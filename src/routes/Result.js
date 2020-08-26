@@ -21,7 +21,8 @@ export default class ResultView extends React.Component {
         this.setState(
             {
                 lang: presetLang,
-                dataLang: stringsLang(presetLang),
+                // dataLang: stringsLang(presetLang),
+                dataLang: stringsLang('en'),
             }
         );
     }
@@ -49,7 +50,7 @@ export default class ResultView extends React.Component {
         if (dataLang !== undefined) {
             return (
                 <StrictMode>
-                    <div className="lang-selector">
+                    {/* <div className="lang-selector">
                         <span // eslint-disable-line
                             data-lang="en"
                             onClick={e => this.changeLanguage(e)}
@@ -64,7 +65,7 @@ export default class ResultView extends React.Component {
                                 lang.includes('ja') ? ' selected' : ''
                                 }`}
                         />
-                    </div>
+                    </div> */}
                     <HeaderSwitch />
                     <Footer />
                 </StrictMode>
