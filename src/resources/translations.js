@@ -43,13 +43,17 @@ export const stringsLang = lang => {
                 faq: {
                     headline: 'FAQ',
                     questionOne: 'What is Ashen?',
-                    responseOne: `TODO.`,
+                    responseOne: `Ashen is a reverse image search engine for Anime developed and released by Animeshon.
+                        Ashen can lookup images taken from Anime episodes such as screenshots and video frames.
+                        The results are returned as a list of Anime and episodes ranked by similarity with frames found in our database.`,
                     questionTwo: 'Can Ashen only recognize Anime images?',
-                    responseTwo: `TODO. `,
+                    responseTwo: `At the moment Ashen can only recognize images taken directly from episodes of Anime.
+                        There is currently a roadmap to implement additional support for video and audio format.
+                        Animeshon is also researching technologies for Manga image recognition and indexing.`,
                     questionThree: 'Can I integrate Ashen with my Telegram or Discord bot?',
-                    responseThree: `TODO.`,
-                    questionFour: 'Do you have public API documentation?',
-                    responseFour: `TODO.`,
+                    responseThree: `Yes. Documentation is available at the official
+                        <a target="_blank" href="https://docs.animeshon.com">Animeshon Docs</a> and on
+                        <a target="_blank" href="https://github.com/animeshon">Animeshon GitHub</a>.`,
                 }
             };
     }
