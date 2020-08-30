@@ -58,21 +58,19 @@ export default class Home extends React.Component {
     handleSubmit = e => {
         this.setState({ isLoading: true });
 
-        const data = new FormData()
-        data.append('image', e.target.files[0])
-
-        fetch("https://source.animeapis.com/v1/search", {
+        fetch("https://source.animeapis.com/v1beta2/search/image", {
             method: 'POST',
-            body: data
+            body: e.target.files[0]
         })
             .then(response => response.json())
             .then(
-                (result) => {
-                    console.log(result);
+                (resp) => {
+                    console.log(resp);
 
-                    const xref = result[0].xRefs;
-                    const distance = result[0].distance;
-                    const responseTime = (parseFloat(result[0].queryTimeMs) / 1000).toFixed(2);
+                    const anidb = resp.results[0].crossreferences["anidb.net"];
+                    const thetvdb = resp.results[0].crossreferences["thetvdb.com"];
+                    const distance = resp.results[0].distance;
+                    const responseTime = (parseFloat(resp.results[0].queryTimeMs) / 1000).toFixed(2);
 
                     var confidence = "UNKNOWN";
                     if (parseFloat(distance) < 8) {
@@ -86,7 +84,7 @@ export default class Home extends React.Component {
                     }
 
                     const hl = queryString.parse(window.location.search).hl;
-                    const location = `/results?anidb_id=${xref.aniDBAnimeID}&thetvdb_id=${xref.tvDBSeriesID}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
+                    const location = `/results?anidb_id=${anidb.animeId}&thetvdb_id=${thetvdb.animeId}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
 
                     this.props.history.push(location);
                 },
