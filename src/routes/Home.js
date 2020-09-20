@@ -53,45 +53,111 @@ export default class Home extends React.Component {
             valueTrialError: '',
             [e.target.title]: e.target.value,
         });
-    };  
+    };
 
     handleSubmit = e => {
         this.setState({ isLoading: true });
 
-        fetch("https://source.animeapis.com/v1beta2/search/image", {
-            method: 'POST',
-            body: e.target.files[0]
-        })
-            .then(response => response.json())
-            .then(
-                (resp) => {
-                    console.log(resp);
+        // Accepted Media MIMEs - anythin else will be rejected by the server.
+        var imageMIME = ["image/jpg", "image/jpeg", "image/png", "image/bmp", "image/webp"];
+        var videoMIME = ["video/webm", "video/mp4", "video/x-flv", "video/flv", "video/ogg", "video/ogv", "video/x-matroska", "video/mkv"];
 
-                    const anidb = resp.results[0].crossreferences["anidb.net"];
-                    const thetvdb = resp.results[0].crossreferences["thetvdb.com"];
-                    const distance = resp.results[0].distance;
-                    const responseTime = (parseFloat(resp.results[0].queryTimeMs) / 1000).toFixed(2);
-
-                    var confidence = "UNKNOWN";
-                    if (parseFloat(distance) < 8) {
-                        confidence = "HIGH";
-                    } else if (parseFloat(distance) < 15) {
-                        confidence = "MEDIUM";
-                    } else if (parseFloat(distance) < 20) {
-                        confidence = "LOW";
-                    } else {
-                        confidence = "MISMATCH";
+        if (imageMIME.includes(e.target.files[0].type)) {
+            fetch("https://source.animeapis.com/v1beta2/search/image", {
+                method: 'POST',
+                body: e.target.files[0]
+            })
+                .then(function (response) {
+                    if (response.status == 404) {
+                        alert("Unfortunately, no resource was found that matched the search criteria.");
+                        throw new Error("NOT_FOUND");
+                    } else if (response.status != 200) {
+                        alert("The server responded with a status " + response.status + ". It might be that the server is temporarily offline.");
+                        throw new Error("UNAVAILABLE");
                     }
 
-                    const hl = queryString.parse(window.location.search).hl;
-                    const location = `/results?anidb_id=${anidb.animeId}&thetvdb_id=${thetvdb.animeId}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
+                    return response.json();
+                })
+                .then(
+                    (resp) => {
+                        const anidb = resp.results[0].crossreferences["anidb.net"];
+                        const thetvdb = resp.results[0].crossreferences["thetvdb.com"];
+                        const distance = resp.results[0].distance;
+                        const responseTime = resp.results[0].queryTimeMs;
 
-                    this.props.history.push(location);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
+                        var confidence = "UNKNOWN";
+                        if (parseFloat(distance) < 8) {
+                            confidence = "HIGH";
+                        } else if (parseFloat(distance) < 15) {
+                            confidence = "MEDIUM";
+                        } else if (parseFloat(distance) < 20) {
+                            confidence = "LOW";
+                        } else {
+                            confidence = "MISMATCH";
+                        }
+
+                        const hl = queryString.parse(window.location.search).hl;
+                        const location = `/results?anidb_id=${anidb.animeId}&thetvdb_id=${thetvdb.animeId}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
+
+                        this.props.history.push(location);
+                    },
+                    (error) => {
+                        console.log(error);
+
+                        if (error != "Error: NOT_FOUND" && error != "Error: UNAVAILABLE") {
+                            alert("The server is temporarily offline: "+error);
+                        }
+                    }
+                )
+        } else if (videoMIME.includes(e.target.files[0].type)) {
+            fetch("https://source.animeapis.com/v1beta2/search/video?filter=merge", {
+                method: 'POST',
+                body: e.target.files[0]
+            })
+                .then(function (response) {
+                    if (response.status == 404) {
+                        alert("Unfortunately, no resource was found that matched the search criteria.");
+                        throw new Error("NOT_FOUND");
+                    } else if (response.status != 200) {
+                        alert("The server responded with a status " + response.status + ". It might be that the server is temporarily offline.");
+                        throw new Error("UNAVAILABLE");
+                    }
+
+                    return response.json();
+                })
+                .then(
+                    (resp) => {
+                        const anidb = resp.results[0].crossreferences["anidb.net"];
+                        const distance = resp.results[0].distance;
+                        const responseTime = resp.results[0].queryTimeMs;
+
+                        var confidence = "UNKNOWN";
+                        if (parseFloat(distance) < 8) {
+                            confidence = "HIGH";
+                        } else if (parseFloat(distance) < 15) {
+                            confidence = "MEDIUM";
+                        } else if (parseFloat(distance) < 20) {
+                            confidence = "LOW";
+                        } else {
+                            confidence = "MISMATCH";
+                        }
+
+                        const hl = queryString.parse(window.location.search).hl;
+                        const location = `/results?anidb_id=${anidb.animeId}&confidence=${confidence}&t=${responseTime}&hl=${hl}`;
+
+                        this.props.history.push(location);
+                    },
+                    (error) => {
+                        console.log(error);
+
+                        if (error != "Error: NOT_FOUND" && error != "Error: UNAVAILABLE") {
+                            alert("The server is temporarily offline: "+error);
+                        }
+                    }
+                )
+        } else {
+            alert("The selected media type is not supported.");
+        }
     };
 
     accordionOnClick = e => {
